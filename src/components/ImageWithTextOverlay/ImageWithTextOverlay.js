@@ -20,8 +20,9 @@ const ImageWithTextOverlay = () => {
             Hurricane Intensity Estimation
           </h1>
           <p className='text-white text-lg mb-4'>
-            Your content goes here. Explain what the image is about or any other
-            relevant information.
+            Developing a Convolutional Neural Network (CNN) method for
+            estimating hurricane intensity using visible band satellite images
+            sourced from the INSAT-3D satellite.
           </p>
           {user && (
             <Link

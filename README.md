@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Cylone_Detection_Intensity_Estimation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Developing a Convolutional Neural Network (CNN) method for estimating cyclone intensity using visible band satellite images sourced from the INSAT-3D satellite.
 
-## Available Scripts
+## Dataset
 
-In the project directory, you can run:
+The dataset consists of the images of various cyclones (of 30-minute intervals) of the Indian peninsula and its cyclone intensities estimated at every 6hr interval. The collection is of IR images that are suitable for collecting images of cyclones even at night. The missing cyclone intensity values are imputed by time-series data analysis.  The dataset is collected from the Meteorological and oceanographic Satellite data archive center (MOSDAC) of ISRO. The dataset consists of 1032 images. 
 
-### `npm start`
+The sample images of dataset used can be found at: https://shrtco.de/Lxm8WD
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Visit MOSDAC at: https://www.mosdac.gov.in/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Methodology
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The approach is divided into 3 parts:
 
-### `npm run build`
+i.   Detect the cyclone from the satellite image using the YOLOv5 object detection model.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ii.  Extract the Region of interest (ROI) from the detected cyclone.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+iii.  Calculate the intensity of the ROI image using the VGG16 and InceptionV3 model. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img src="https://github.com/manchalaharikesh/Cylone_Detection_Intensity_Estimation/blob/main/static/Methodoly_Cyclone_Estimation.jpg?raw=true">
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Results
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After training the model using TensorFlow we have achieved the results:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Results of VGG-16**
+1. Mean Absolute Error(MAE): 0.103
+2. Root Mean Absolute Error(RMSE): 0.32
+3. R2 Score: 0.74
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Results of Inception-V3**
+1. Mean Absolute Error(MAE): 0.25
+2. Root Mean Absolute Error(RMSE): 0.503
+3. R2 Score: 0.76
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Further Scope
+Leveraging Brightness Temperature (BT) to extract crucial information about water temperature from satellite imagery, thereby enhancing the precision of cyclone intensity estimation models.
